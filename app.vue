@@ -1,3 +1,4 @@
 <template>
     <ActivityGroups />
+    <CreateActivityGroup />
 </template>
