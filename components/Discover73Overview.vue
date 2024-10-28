@@ -46,17 +46,17 @@
                     </div>
 
                     <div class="flex space-x-4">
-                        <div v-for="(activity, index) in group.activities.slice(0, 5)" :key="activity.id" class="w-16 h-16 bg-cyan-100 border-2 border-cyan-200 rounded-md flex items-center justify-center text-sm text-cyan-950 hover:bg-cyan-200">
-                            <p>{{ activity.name }}</p>
-                        </div>
+                        <ActivityButton
+                            v-for="(activity) in group.activities.slice(0, 5)"
+                            :key="activity.id"
+                            :status="activity.status"
+                        />
 
-                        <button
+                        <ActivityButton
                             v-for="n in Math.max(0, 5 - group.activities.length)"
                             :key="'button-' + n"
-                            class="w-16 h-16 bg-gray-100 border-2 border-gray-200 rounded-md flex items-center justify-center text-sm text-gray-950 hover:bg-gray-200"
-                        >
-                            {{ n }}
-                        </button>
+                            status=""
+                        />
                     </div>
 
                     <button @click="deleteActivityGroup(group.id)" class="ml-4 px-4 py-2 bg-red-500 text-white text-xs rounded-md hover:bg-red-600">
