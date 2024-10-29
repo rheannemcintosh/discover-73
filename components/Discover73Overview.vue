@@ -2,6 +2,7 @@
     import { ref, onMounted } from 'vue';
     import { ActivityGroup } from '~/types/activityGroup';
     import { getActivityGroups } from '~/composables/getActivityGroups';
+    import type {Activity} from "~/types/Activity";
 
     const activityGroups = ref<ActivityGroup[]>([]);
     const error = ref<string | null>(null);
@@ -13,6 +14,25 @@
             error.value = (err as Error).message;
         }
     });
+
+    const showPopup = ref(false);
+
+    const selectedActivity = ref<Activity | null>()
+
+    const openPopup = (activity: Activity) => {
+        selectedActivity.value = activity; // Set the selected activity
+        showPopup.value = true; // Show the popup
+    };
+
+    const closePopup = () => {
+        selectedActivity.value = null;
+        showPopup.value = false;
+    }
+    
+    const handleSubmit = () => {
+        console.log('Submit button clicked!');
+        showPopup.value = false;
+    };
 
     const deleteActivityGroup = async (id: number) => {
         try {
@@ -50,12 +70,14 @@
                             v-for="(activity) in group.activities.slice(0, 5)"
                             :key="activity.id"
                             :status="activity.status"
+                            @click="openPopup(activity)"
                         />
 
                         <ActivityButton
                             v-for="n in Math.max(0, 5 - group.activities.length)"
                             :key="'button-' + n"
                             status=""
+                            @click="showPopup = true"
                         />
                     </div>
 
@@ -65,6 +87,24 @@
                 </div>
             </div>
         </div>
+
+        <Popup
+            :title="'Activity Details'"
+            :isVisible="showPopup"
+            @close="closePopup"
+        >
+            <template #body>
+                <div v-if="selectedActivity">
+                    <p><strong>ID:</strong> {{ selectedActivity.id }}</p>
+                    <p><strong>Name:</strong> {{ selectedActivity.name }}</p>
+                    <p><strong>Description:</strong> {{ selectedActivity.description }}</p>
+                    <p><strong>Status:</strong> {{ selectedActivity.status }}</p>
+                </div>
+                <div v-else>
+                    <p>No activity selected</p>
+                </div>
+            </template>
+        </Popup>
     </div>
 </template>
 
