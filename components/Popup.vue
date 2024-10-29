@@ -16,7 +16,7 @@
                             <h3>{{ title }}</h3>
                         </div>
                         <div class="popup-body">
-                            <slot />
+                            <slot name="body" />
                         </div>
                         <div class="popup-buttons">
                             <button
