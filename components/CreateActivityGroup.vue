@@ -1,33 +1,34 @@
 <template>
     <div>
-        <h1>Create Activity Group</h1>
+        <div class="pb-2">
+            <div v-if="error" class="bg-red-600 rounded-md px-4 py-1 text-white text-sm">
+                <p>{{ error }}</p>
+            </div>
+            <div v-if="successMessage" class="bg-green-600 rounded-md px-4 py-1 text-white text-sm">
+                <p>{{ successMessage }}</p>
+            </div>
+        </div>
         <form @submit.prevent="submitForm">
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" v-model="form.name" id="name" />
+            <div class="">
+                <div class="grid grid-cols-3 p-2">
+                    <DLabel for="name">Name</DLabel>
+                    <input class="col-span-2 border-2 border-cyan-700 rounded-md px-2" type="text" v-model="form.name" id="name" />
+                </div>
+                <div class="grid grid-cols-3 p-2">
+                    <DLabel for="description">Description</DLabel>
+                    <input  class="col-span-2 border-2 border-cyan-700 rounded-md px-2" type="text" v-model="form.description" id="description" />
+                </div>
+                <div class="grid grid-cols-3 p-2">
+                    <DLabel for="status">Status</DLabel>
+                    <select  class="col-span-2 border-2 border-cyan-700 rounded-md px-2" v-model="form.status" id="status">
+                        <option value="" disabled>Please Select</option>
+                        <option value="To Do">To Do</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label for="description">Description:</label>
-                <input type="text" v-model="form.description" id="description" />
-            </div>
-            <div>
-                <label for="status">Status:</label>
-                <select v-model="form.status" id="status">
-                    <option value="" disabled>Please Select</option>
-                    <option value="To Do">To Do</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Done">Done</option>
-                </select>
-            </div>
-            <button type="submit">Create Activity Group</button>
         </form>
-
-        <div v-if="error" class="error">
-            <p>{{ error }}</p>
-        </div>
-        <div v-if="successMessage" class="success">
-            <p>{{ successMessage }}</p>
-        </div>
     </div>
 </template>
 
@@ -103,4 +104,6 @@
             console.error(err);
         }
     };
+
+    defineExpose({ submitForm})
 </script>
