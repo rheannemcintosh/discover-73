@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref, onMounted } from 'vue';
+    import { ref, useTemplateRef, onMounted } from 'vue';
     import { ActivityGroup } from '~/types/activityGroup';
     import { getActivityGroups } from '~/composables/getActivityGroups';
     import type {Activity} from "~/types/Activity";
@@ -16,6 +16,8 @@
     });
 
     const showPopup = ref(false);
+    const showActivityGroupPopup = ref(false);
+
 
     const selectedActivity = ref<Activity | null>()
 
@@ -52,6 +54,13 @@
             error.value = (err as Error).message;
         }
     };
+
+    const form1 = useTemplateRef('form1')
+    
+    const submitAllForms = () => {
+        if (form1.value) form1.value.submitForm()
+    }
+
 </script>
 
 <template>
@@ -115,6 +124,16 @@
                 </div>
             </template>
         </Popup>
+
+        <Popup
+            :title="'Create Activity Group'"
+            :isVisible="showActivityGroupPopup"
+            @close="showActivityGroupPopup = false"
+            @submit="submitAllForms"
+        >
+            <CreateActivityGroup ref="form1" />
+        </Popup>
+
     </div>
 </template>
 
