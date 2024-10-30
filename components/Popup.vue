@@ -16,7 +16,7 @@
                             <h3>{{ title }}</h3>
                         </div>
                         <div class="popup-body">
-                            <slot name="body" />
+                            <slot />
                         </div>
                         <div class="popup-buttons">
                             <button
@@ -25,7 +25,7 @@
                             >
                                 Close
                             </button>
-                            <button class="primary-button">
+                            <button class="primary-button" @click="submitForm">
                                 Submit
                             </button>
                         </div>
@@ -46,11 +46,16 @@
 
     const emit = defineEmits<{
         (e: 'close'): void;
+        (e: 'submit'): void;
     }>();
 
     const close = () => {
         emit('close');
     };
+
+    const submitForm = () => {
+        emit('submit')
+    }
 </script>
 
 <style scoped lang="postcss">

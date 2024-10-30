@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref, onMounted } from 'vue';
+    import { ref, useTemplateRef, onMounted } from 'vue';
     import { ActivityGroup } from '~/types/activityGroup';
     import { getActivityGroups } from '~/composables/getActivityGroups';
     import type {Activity} from "~/types/Activity";
@@ -16,6 +16,8 @@
     });
 
     const showPopup = ref(false);
+    const showActivityGroupPopup = ref(false);
+
 
     const selectedActivity = ref<Activity | null>()
 
@@ -52,13 +54,30 @@
             error.value = (err as Error).message;
         }
     };
+
+    const form1 = useTemplateRef('form1')
+    
+    const submitAllForms = () => {
+        if (form1.value) form1.value.submitForm()
+    }
+
 </script>
 
 <template>
     <div class="bg-gray-50">
         <div class="p-8 max-w-3xl mx-auto">
             <h1 class="text-4xl text-cyan-700 font-bold text-center mb-8">Discover 73</h1>
-            <div class="space-y-6">
+            <div class="flex justify-end">
+                <button
+                    class="ml-4 px-4 py-2 bg-green-600 text-white text-xs rounded-md hover:bg-green-700"
+                    @click="showActivityGroupPopup = true"
+                >
+                    Create Activity Group
+                </button>
+            </div>
+
+            <div class="mt-4 space-y-6">
+
                 <div v-for="group in activityGroups" :key="group.id" class="bg-white border border-gray-200 rounded-lg p-4 flex items-center">
                     <div class="flex-1">
                         <h2 class="text-lg font-semibold text-cyan-900">{{ group.id }}: {{ group.name }}</h2>
@@ -105,6 +124,16 @@
                 </div>
             </template>
         </Popup>
+
+        <Popup
+            :title="'Create Activity Group'"
+            :isVisible="showActivityGroupPopup"
+            @close="showActivityGroupPopup = false"
+            @submit="submitAllForms"
+        >
+            <CreateActivityGroup ref="form1" />
+        </Popup>
+
     </div>
 </template>
 
