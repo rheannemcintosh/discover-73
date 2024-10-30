@@ -58,7 +58,17 @@
     <div class="bg-gray-50">
         <div class="p-8 max-w-3xl mx-auto">
             <h1 class="text-4xl text-cyan-700 font-bold text-center mb-8">Discover 73</h1>
-            <div class="space-y-6">
+            <div class="flex justify-end">
+                <button
+                    class="ml-4 px-4 py-2 bg-green-600 text-white text-xs rounded-md hover:bg-green-700"
+                    @click="showActivityGroupPopup = true"
+                >
+                    Create Activity Group
+                </button>
+            </div>
+
+            <div class="mt-4 space-y-6">
+
                 <div v-for="group in activityGroups" :key="group.id" class="bg-white border border-gray-200 rounded-lg p-4 flex items-center">
                     <div class="flex-1">
                         <h2 class="text-lg font-semibold text-cyan-900">{{ group.id }}: {{ group.name }}</h2>
