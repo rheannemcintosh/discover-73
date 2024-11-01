@@ -1,10 +1,8 @@
 <template>
     <div>
         <div class="pb-2">
-            <div v-if="successMessage" class="bg-green-600 rounded-md px-4 py-1 text-white text-sm">
-                <p>{{ successMessage }}</p>
-            </div>
             <ui-error-message :message="error" />
+            <ui-success-message :message="successMessage" />
         </div>
         <form @submit.prevent="submitForm">
             <div class="">
