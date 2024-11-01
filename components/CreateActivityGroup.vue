@@ -11,15 +11,15 @@
         <form @submit.prevent="submitForm">
             <div class="">
                 <div class="grid grid-cols-3 p-2">
-                    <DLabel for="name">Name</DLabel>
+                    <forms-Label name="name">Name</forms-Label>
                     <input class="col-span-2 border-2 border-cyan-700 rounded-md px-2" type="text" v-model="form.name" id="name" />
                 </div>
                 <div class="grid grid-cols-3 p-2">
-                    <DLabel for="description">Description</DLabel>
+                    <forms-Label name="description">Description</forms-Label>
                     <input  class="col-span-2 border-2 border-cyan-700 rounded-md px-2" type="text" v-model="form.description" id="description" />
                 </div>
                 <div class="grid grid-cols-3 p-2">
-                    <DLabel for="status">Status</DLabel>
+                    <forms-Label name="status">Status</forms-Label>
                     <select  class="col-span-2 border-2 border-cyan-700 rounded-md px-2" v-model="form.status" id="status">
                         <option value="" disabled>Please Select</option>
                         <option value="To Do">To Do</option>
