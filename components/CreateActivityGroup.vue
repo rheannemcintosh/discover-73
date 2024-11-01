@@ -20,12 +20,7 @@
                 </div>
                 <div class="grid grid-cols-3 p-2">
                     <forms-Label name="status">Status</forms-Label>
-                    <select  class="col-span-2 border-2 border-cyan-700 rounded-md px-2" v-model="form.status" id="status">
-                        <option value="" disabled>Please Select</option>
-                        <option value="To Do">To Do</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Done">Done</option>
-                    </select>
+                    <forms-select-input v-model="form.status" id="status" :options="statusOptions" />
                 </div>
             </div>
         </form>
@@ -61,6 +56,12 @@
         description: '',
         status: '',
     });
+
+    const statusOptions = [
+        { value: 'To Do', label: 'To Do' },
+        { value: 'In Progress', label: 'In Progress' },
+        { value: 'Done', label: 'Done' },
+    ];
 
     // State for error and success messages
     const error = ref<string | null>(null);
