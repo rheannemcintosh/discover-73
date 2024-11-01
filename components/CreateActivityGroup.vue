@@ -11,12 +11,12 @@
         <form @submit.prevent="submitForm">
             <div class="">
                 <div class="grid grid-cols-3 p-2">
-                    <forms-Label name="name">Name</forms-Label>
-                    <input class="col-span-2 border-2 border-cyan-700 rounded-md px-2" type="text" v-model="form.name" id="name" />
+                    <forms-label name="name">Name</forms-label>
+                    <forms-text-input v-model="form.name" id="name" />
                 </div>
                 <div class="grid grid-cols-3 p-2">
                     <forms-Label name="description">Description</forms-Label>
-                    <input  class="col-span-2 border-2 border-cyan-700 rounded-md px-2" type="text" v-model="form.description" id="description" />
+                    <forms-text-input v-model="form.description" id="description" />
                 </div>
                 <div class="grid grid-cols-3 p-2">
                     <forms-Label name="status">Status</forms-Label>
