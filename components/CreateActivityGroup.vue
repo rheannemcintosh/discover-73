@@ -11,21 +11,16 @@
         <form @submit.prevent="submitForm">
             <div class="">
                 <div class="grid grid-cols-3 p-2">
-                    <DLabel for="name">Name</DLabel>
-                    <input class="col-span-2 border-2 border-cyan-700 rounded-md px-2" type="text" v-model="form.name" id="name" />
+                    <forms-label name="name">Name</forms-label>
+                    <forms-text-input v-model="form.name" id="name" />
                 </div>
                 <div class="grid grid-cols-3 p-2">
-                    <DLabel for="description">Description</DLabel>
-                    <input  class="col-span-2 border-2 border-cyan-700 rounded-md px-2" type="text" v-model="form.description" id="description" />
+                    <forms-label name="description">Description</forms-label>
+                    <forms-text-input v-model="form.description" id="description" />
                 </div>
                 <div class="grid grid-cols-3 p-2">
-                    <DLabel for="status">Status</DLabel>
-                    <select  class="col-span-2 border-2 border-cyan-700 rounded-md px-2" v-model="form.status" id="status">
-                        <option value="" disabled>Please Select</option>
-                        <option value="To Do">To Do</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Done">Done</option>
-                    </select>
+                    <forms-label name="status">Status</forms-label>
+                    <forms-select-input v-model="form.status" id="status" :options="statusOptions" />
                 </div>
             </div>
         </form>
@@ -61,6 +56,12 @@
         description: '',
         status: '',
     });
+
+    const statusOptions = [
+        { value: 'To Do', label: 'To Do' },
+        { value: 'In Progress', label: 'In Progress' },
+        { value: 'Done', label: 'Done' },
+    ];
 
     // State for error and success messages
     const error = ref<string | null>(null);
