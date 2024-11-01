@@ -1,13 +1,20 @@
 <script setup lang="ts">
-    import { ref, useTemplateRef, onMounted } from 'vue';
+    import { ref, useTemplateRef, onMounted, onUpdated } from 'vue';
     import { ActivityGroup } from '~/types/activityGroup';
-    import { getActivityGroups } from '~/composables/getActivityGroups';
     import type {Activity} from "~/types/Activity";
 
     const activityGroups = ref<ActivityGroup[]>([]);
     const error = ref<string | null>(null);
 
     onMounted(async () => {
+        try {
+            activityGroups.value = await getActivityGroups();
+        } catch (err) {
+            error.value = (err as Error).message;
+        }
+    });
+
+    onUpdated(async () => {
         try {
             activityGroups.value = await getActivityGroups();
         } catch (err) {
