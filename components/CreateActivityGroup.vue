@@ -15,11 +15,11 @@
                     <forms-text-input v-model="form.name" id="name" />
                 </div>
                 <div class="grid grid-cols-3 p-2">
-                    <forms-Label name="description">Description</forms-Label>
+                    <forms-label name="description">Description</forms-label>
                     <forms-text-input v-model="form.description" id="description" />
                 </div>
                 <div class="grid grid-cols-3 p-2">
-                    <forms-Label name="status">Status</forms-Label>
+                    <forms-label name="status">Status</forms-label>
                     <forms-select-input v-model="form.status" id="status" :options="statusOptions" />
                 </div>
             </div>
