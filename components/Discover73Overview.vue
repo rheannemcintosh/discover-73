@@ -24,13 +24,19 @@
 
     const showPopup = ref(false);
     const showActivityGroupPopup = ref(false);
-
+    const showActivityPopup = ref(false);
 
     const selectedActivity = ref<Activity | null>()
+    const selectedGroup = ref<ActivityGroup | null>(null);
 
     const openPopup = (activity: Activity) => {
         selectedActivity.value = activity; // Set the selected activity
         showPopup.value = true; // Show the popup
+    };
+
+    const openActivityPopup = (group: ActivityGroup) => {
+        selectedGroup.value = group;
+        showActivityPopup.value = true;
     };
 
     const closePopup = () => {
@@ -63,9 +69,11 @@
     };
 
     const form1 = useTemplateRef('form1')
+    const form2 = useTemplateRef('form2')
     
     const submitAllForms = () => {
         if (form1.value) form1.value.submitForm()
+        if (form2.value) form2.value.submitForm()
     }
 
 </script>
@@ -96,14 +104,14 @@
                             v-for="(activity) in group.activities.slice(0, 5)"
                             :key="activity.id"
                             :status="activity.status"
-                            @click="openPopup(activity)"
+                            @click="showPopup = true"
                         />
 
                         <ActivityButton
                             v-for="n in Math.max(0, 5 - group.activities.length)"
                             :key="'button-' + n"
                             status=""
-                            @click="showPopup = true"
+                            @click="openActivityPopup(group)"
                         />
                     </div>
 
@@ -141,6 +149,14 @@
             <CreateActivityGroup ref="form1" />
         </Popup>
 
+        <Popup
+            :title="'Create Activity'"
+            :isVisible="showActivityPopup"
+            @close="showActivityPopup = false"
+            @submit="submitAllForms"
+        >
+            <CreateActivity :group="selectedGroup" ref="form2" />
+        </Popup>
     </div>
 </template>
 
