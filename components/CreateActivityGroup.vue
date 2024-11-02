@@ -24,9 +24,7 @@
 </template>
 
 <script setup lang="ts">
-    import { useSubmitForm } from '~/composables/useSubmitForm';
-
-    const { form, error, successMessage, submitForm } = useSubmitForm();
+    const { form, error, successMessage, submitForm } = useSubmitActivityGroupForm();
 
     const statusOptions = [
         { value: 'To Do', label: 'To Do' },

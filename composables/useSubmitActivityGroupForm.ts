@@ -1,4 +1,4 @@
-// composables/useSubmitForm.ts
+// composables/useSubmitActivityGroupForm.ts
 import { ref } from 'vue';
 
 interface ActivityForm {
@@ -20,7 +20,7 @@ interface ApiSuccessResponse {
     };
 }
 
-export function useSubmitForm() {
+export function useSubmitActivityGroupForm() {
     const form = ref<ActivityForm>({
         name: '',
         description: '',
