@@ -79,9 +79,6 @@
 </script>
 
 <template>
-    <div class="bg-gray-50">
-        <div class="p-8 max-w-3xl mx-auto">
-            <h1 class="text-4xl text-cyan-700 font-bold text-center mb-8">Discover 73</h1>
             <div class="flex justify-end">
                 <button
                     class="ml-4 px-4 py-2 bg-green-600 text-white text-xs rounded-md hover:bg-green-700"
@@ -120,7 +117,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+
 
         <Popup
             :title="'Activity Details'"
@@ -157,6 +154,6 @@
         >
             <CreateActivity :group="selectedGroup" ref="form2" />
         </Popup>
-    </div>
+
 </template>
 
